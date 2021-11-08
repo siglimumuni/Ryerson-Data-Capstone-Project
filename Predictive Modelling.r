@@ -14,7 +14,7 @@ bshare_ts <- ts(df["Number.of.Trips"],frequency=12,start=c(2018,1))
 print(bshare_ts)
 
 #Plot the data on a line graph
-plot.ts(bshare_ts,col="blue",xlab="Period", ylab="Number of Rides",main="Number of Rides per Month (2018-2020)", type='l',lwd=2)
+plot.ts(bshare_ts,col="blue",xlab="Period", ylab="Number of Trips",main="Number of Trips per Month (2018-2020)", type='l',lwd=2)
 
 #Decompose the data into trend, seasonal and random components
 bshare_decomposed <- decompose(bshare_ts,"multiplicative")
@@ -31,7 +31,7 @@ validation <- window(bshare_ts, start = c(2020,7))
 naive = snaive(training, h=length(validation))
 
 #plot the actual values
-plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Rides",main="Seasonal Naive Forecast", type='l',lwd=2)
+plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Trips",main="Seasonal Naive Forecast", type='l',lwd=2)
 #plot the predicted values
 lines(naive$mean,col="orange",lwd=2)
 #add a legend
@@ -45,7 +45,7 @@ RMSE(naive$mean, validation)
 dshw_model = dshw(training, period1=2, period2 = 12, h=length(validation))
 
 #plot the actual values
-plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Rides",main="DSHW Forecast", type='l',lwd=2)
+plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Trips",main="DSHW Forecast", type='l',lwd=2)
 #plot the predicted values
 lines(dshw_model$mean,col="orange",lwd=2)
 #add a legend
@@ -59,7 +59,7 @@ sarima_forecast = sarima.for(training, n.ahead=length(validation),
                               p=1,d=1,q=1,P=1,D=1,Q=0,S=12)
 
 #plot the actual values
-plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Rides",main="SARIMA Forecast", type='l',lwd=2)
+plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Trips",main="SARIMA Forecast", type='l',lwd=2)
 #plot the predicted values
 lines(sarima_forecast$pred,col="orange",lwd=2)
 #add a legend
@@ -73,7 +73,7 @@ tbats_model = tbats(training)
 tbats_forecast = forecast(tbats_model, h=length(validation))
 
 #plot the actual values
-plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Rides",main="TBATS Forecast", type='l',lwd=2)
+plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Trips",main="TBATS Forecast", type='l',lwd=2)
 #plot the predicted values
 lines(tbats_forecast$mean,col="orange",lwd=2)
 #add a legend
@@ -87,7 +87,7 @@ nn_model <- nnetar(training)
 nn_forecast <- forecast(nn_model, h=length(validation))
 
 #plot the actual values
-plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Rides",main="Neural Network Forecast", type='l',lwd=2)
+plot(bshare_ts,col="blue",xlab="Period", ylab="Number of Trips",main="Neural Network Forecast", type='l',lwd=2)
 #plot the predicted values
 lines(nn_forecast$mean,col="orange",lwd=2)
 #add a legend
